@@ -1,5 +1,4 @@
-from http.client import responses
-
+from rest_framework.pagination import PageNumberPagination
 from django.db.models import Count
 from rest_framework import status, generics, viewsets
 from rest_framework.decorators import api_view
@@ -9,7 +8,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.pagination import PageNumberPagination
 
 
 class ActorApi(APIView):

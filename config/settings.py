@@ -108,7 +108,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-from drf_yasg import openapi
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
