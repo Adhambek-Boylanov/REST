@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from drf_yasg.utils import swagger_auto_schema
+from .make_token import get_tokens_for_user
 
 
 class ActorApi(APIView):
@@ -120,7 +121,14 @@ class CommitAPI(APIView):
         commit = get_object_or_404(CommitMovie, pk=pk)
         commit.delete()
         return Response(status=status.HTTP_200_OK)
-
+class LoginUser(APIView):
+    @swagger_auto_schema(request_body=LoginSerializers)
+    def post(self,request):
+        serializer = LoginSerializers(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = get_object_or_404(User,username = serializer.validated_data.get('username'))
+        token = get_tokens_for_user(user)
+        return Response(data=token)
 
 # class ProductApi(generics.ListCreateAPIView):
 #     queryset = Product.objects.all()
